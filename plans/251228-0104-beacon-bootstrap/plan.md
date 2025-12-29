@@ -52,9 +52,12 @@
 - 90-day uptime bars (gray/green)
 
 ### 2. Roadmap (/roadmap)
-- 4-column kanban: Exploring > Planned > In Progress > Shipped
-- Feature cards: title, votes, category tag
-- Filter bar + search
+- 5-column kanban: Not Planned > Planned > In Progress > Shipped > Declined
+- User submissions land in "Not Planned" column
+- Feature cards: upvote, title, topic tags (max 3), comments, followers
+- Submit Request button + modal form
+- Filter by topic + search (⌘K)
+- Sort by: most voted, newest, trending
 
 ### 3. Changelog (/changelog)
 - Vertical timeline layout
