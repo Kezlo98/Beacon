@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beacon - Roadmap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --background: #FFFFFF;
+      --surface: #FAFAFA;
+      --text-primary: #09090B;
+      --text-secondary: #3F3F46;
+      --text-muted: #71717A;
+      --border: #E4E4E7;
+      --accent: #3B82F6;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: var(--background);
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav a:hover, .nav a.active {
+      color: var(--text-primary);
+    }
+
+    /* Page Header */
+    .page-header {
+      margin-bottom: 24px;
+    }
+
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .page-description {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .filter-select {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+      background: var(--background);
+      cursor: pointer;
+    }
+
+    .search-input {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+      min-width: 200px;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    /* Kanban Board */
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 1024px) {
+      .kanban-board {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .kanban-board {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .kanban-column {
+      background: var(--surface);
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 400px;
+    }
+
+    .column-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .column-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .column-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--background);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    /* Feature Card */
+    .feature-card {
+      background: var(--background);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: box-shadow 0.15s;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .feature-description {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .feature-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .category-tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: #EFF6FF;
+      color: #2563EB;
+    }
+
+    .category-tag.api { background: #F0FDF4; color: #16A34A; }
+    .category-tag.ux { background: #FDF4FF; color: #A855F7; }
+    .category-tag.integration { background: #FFF7ED; color: #EA580C; }
+
+    .vote-button {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--background);
+      cursor: pointer;
+      font-size: 12px;
+      color: var(--text-secondary);
+      transition: all 0.15s;
+    }
+
+    .vote-button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .vote-button.voted {
+      background: #EFF6FF;
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 48px 0 32px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Annotation */
+    .annotation {
+      background: #FFFBEB;
+      border: 1px dashed #F59E0B;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #92400E;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ANNOTATION: Header with navigation -->
+    <div class="annotation">Header: Same as status page. Roadmap link active.</div>
+
+    <header class="header">
+      <a href="/" class="logo">Beacon</a>
+      <nav class="nav">
+        <a href="/">Status</a>
+        <a href="/roadmap" class="active">Roadmap</a>
+        <a href="/changelog">Changelog</a>
+      </nav>
+    </header>
+
+    <!-- ANNOTATION: Page header and filters -->
+    <div class="annotation">Page Header: Title + description. Filter by category, search by title.</div>
+
+    <div class="page-header">
+      <h1 class="page-title">Product Roadmap</h1>
+      <p class="page-description">See what we're building and vote for features you want.</p>
+    </div>
+
+    <div class="filter-bar">
+      <select class="filter-select">
+        <option>All Categories</option>
+        <option>Feature</option>
+        <option>API</option>
+        <option>UX</option>
+        <option>Integration</option>
+      </select>
+      <input type="text" class="search-input" placeholder="Search features...">
+    </div>
+
+    <!-- ANNOTATION: Kanban board -->
+    <div class="annotation">Kanban: 4 columns. Cards show title, description (2 lines), category tag, vote count. Click to expand.</div>
+
+    <div class="kanban-board">
+      <!-- Exploring Column -->
+      <div class="kanban-column">
+        <div class="column-header">
+          <span class="column-title">Exploring</span>
+          <span class="column-count">3</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-title">Email notifications</div>
+          <div class="feature-description">Get notified when services go down or incidents are updated.</div>
+          <div class="feature-footer">
+            <span class="category-tag">Feature</span>
+            <button class="vote-button">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+              </svg>
+              42
+            </button>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-title">Slack integration</div>
+          <div class="feature-description">Post status updates directly to your Slack channels.</div>
+          <div class="feature-footer">
+            <span class="category-tag integration">Integration</span>
+            <button class="vote-button">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+              </svg>
+              38
+            </button>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-title">Custom domains</div>
+          <div class="feature-description">Use your own domain for the status page.</div>
+          <div class="feature-footer">
+            <span class="category-tag">Feature</span>
+            <button class="vote-button">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+              </svg>
+              27
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Planned Column -->
+      <div class="kanban-column">
+        <div class="column-header">
+          <span class="column-title">Planned</span>
+          <span class="column-count">2</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-title">API v2</div>
+          <div class="feature-description">New REST API with webhooks, better authentication, and rate limiting.</div>
+          <div class="feature-footer">
+            <span class="category-tag api">API</span>
+            <button class="vote-button voted">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+              </svg>
+              89
+            </button>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-title">Component status</div>
+          <div class="feature-description">Show status for individual components within a service.</div>
+          <div class="feature-footer">
+            <span class="category-tag">Feature</span>
+            <button class="vote-button">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+              </svg>
+              56
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- In Progress Column -->
+      <div class="kanban-column">
+        <div class="column-header">
+          <span class="column-title">In Progress</span>
+          <span class="column-count">1</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-title">Dark mode</div>
+          <div class="feature-description">Toggle between light and dark themes for the status page.</div>
+          <div class="feature-footer">
+            <span class="category-tag ux">UX</span>
+            <button class="vote-button voted">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 15l-6-6-6 6"/>
+              </svg>
+              142
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shipped Column -->
+      <div class="kanban-column">
+        <div class="column-header">
+          <span class="column-title">Shipped</span>
+          <span class="column-count">2</span>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-title">Uptime history</div>
+          <div class="feature-description">90-day uptime graph showing historical status data.</div>
+          <div class="feature-footer">
+            <span class="category-tag">Feature</span>
+            <span style="font-size: 12px; color: #16A34A;">Shipped</span>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-title">Public changelog</div>
+          <div class="feature-description">Share release notes and updates with your users.</div>
+          <div class="feature-footer">
+            <span class="category-tag">Feature</span>
+            <span style="font-size: 12px; color: #16A34A;">Shipped</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      Powered by <a href="#">Beacon</a>
+    </footer>
+  </div>
+</body>
+</html>

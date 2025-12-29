@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beacon - Changelog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --background: #FFFFFF;
+      --surface: #FAFAFA;
+      --text-primary: #09090B;
+      --text-secondary: #3F3F46;
+      --text-muted: #71717A;
+      --border: #E4E4E7;
+      --accent: #3B82F6;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: var(--background);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav a:hover, .nav a.active {
+      color: var(--text-primary);
+    }
+
+    /* Page Header */
+    .page-header {
+      margin-bottom: 32px;
+    }
+
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .page-description {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Timeline */
+    .timeline {
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    @media (min-width: 640px) {
+      .timeline::before {
+        left: 80px;
+      }
+    }
+
+    /* Timeline Entry */
+    .timeline-entry {
+      position: relative;
+      padding-left: 24px;
+      padding-bottom: 48px;
+    }
+
+    @media (min-width: 640px) {
+      .timeline-entry {
+        padding-left: 104px;
+      }
+    }
+
+    .timeline-entry::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--background);
+    }
+
+    @media (min-width: 640px) {
+      .timeline-entry::before {
+        left: 76px;
+      }
+    }
+
+    .timeline-date {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 13px;
+      color: var(--text-muted);
+      display: none;
+    }
+
+    @media (min-width: 640px) {
+      .timeline-date {
+        display: block;
+      }
+    }
+
+    .timeline-date-mobile {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    @media (min-width: 640px) {
+      .timeline-date-mobile {
+        display: none;
+      }
+    }
+
+    /* Entry Content */
+    .entry-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .entry-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .version-badge {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: var(--accent);
+      color: white;
+    }
+
+    .entry-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    /* Markdown Content */
+    .entry-content h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      margin-top: 16px;
+    }
+
+    .entry-content h3:first-child {
+      margin-top: 0;
+    }
+
+    .entry-content ul {
+      margin-left: 20px;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .entry-content li {
+      margin-bottom: 4px;
+    }
+
+    .entry-content code {
+      background: #F4F4F5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: 'SF Mono', monospace;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 48px 0 32px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Annotation */
+    .annotation {
+      background: #FFFBEB;
+      border: 1px dashed #F59E0B;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #92400E;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ANNOTATION: Header -->
+    <div class="annotation">Header: Same as other pages. Changelog link active.</div>
+
+    <header class="header">
+      <a href="/" class="logo">Beacon</a>
+      <nav class="nav">
+        <a href="/">Status</a>
+        <a href="/roadmap">Roadmap</a>
+        <a href="/changelog" class="active">Changelog</a>
+      </nav>
+    </header>
+
+    <!-- ANNOTATION: Page header -->
+    <div class="annotation">Page Header: Simple title and optional description.</div>
+
+    <div class="page-header">
+      <h1 class="page-title">Changelog</h1>
+      <p class="page-description">All notable changes and updates to our platform.</p>
+    </div>
+
+    <!-- ANNOTATION: Timeline -->
+    <div class="annotation">Timeline: Vertical layout with connecting line. Date on left (desktop), version badge + content on right. Markdown-rendered content.</div>
+
+    <div class="timeline">
+      <!-- Entry 1 -->
+      <div class="timeline-entry">
+        <div class="timeline-date">Dec 28, 2024</div>
+        <div class="timeline-date-mobile">Dec 28, 2024</div>
+        <div class="entry-card">
+          <div class="entry-header">
+            <span class="version-badge">v1.2.0</span>
+            <span class="entry-title">Feature Release</span>
+          </div>
+          <div class="entry-content">
+            <h3>New Features</h3>
+            <ul>
+              <li>Added dark mode support for all public pages</li>
+              <li>New webhook endpoints for incident notifications</li>
+              <li>Real-time status updates using Server-Sent Events</li>
+            </ul>
+            <h3>Improvements</h3>
+            <ul>
+              <li>Improved uptime calculation accuracy</li>
+              <li>Better mobile responsiveness on roadmap page</li>
+              <li>Faster page load times with edge caching</li>
+            </ul>
+            <h3>Bug Fixes</h3>
+            <ul>
+              <li>Fixed timezone display in incident timestamps</li>
+              <li>Resolved issue with vote counts not updating</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entry 2 -->
+      <div class="timeline-entry">
+        <div class="timeline-date">Dec 15, 2024</div>
+        <div class="timeline-date-mobile">Dec 15, 2024</div>
+        <div class="entry-card">
+          <div class="entry-header">
+            <span class="version-badge">v1.1.0</span>
+            <span class="entry-title">Roadmap & Voting</span>
+          </div>
+          <div class="entry-content">
+            <h3>New Features</h3>
+            <ul>
+              <li>Public product roadmap with kanban view</li>
+              <li>Feature voting system for users</li>
+              <li>Category filtering on roadmap page</li>
+            </ul>
+            <h3>Improvements</h3>
+            <ul>
+              <li>Updated navigation with active states</li>
+              <li>Added <code>robots.txt</code> for better SEO</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entry 3 -->
+      <div class="timeline-entry">
+        <div class="timeline-date">Dec 1, 2024</div>
+        <div class="timeline-date-mobile">Dec 1, 2024</div>
+        <div class="entry-card">
+          <div class="entry-header">
+            <span class="version-badge">v1.0.0</span>
+            <span class="entry-title">Initial Release</span>
+          </div>
+          <div class="entry-content">
+            <h3>Features</h3>
+            <ul>
+              <li>Public status page with service list</li>
+              <li>90-day uptime history visualization</li>
+              <li>Incident management and display</li>
+              <li>Admin dashboard for service management</li>
+              <li>Changelog page (you're looking at it!)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      Powered by <a href="#">Beacon</a>
+    </footer>
+  </div>
+</body>
+</html>

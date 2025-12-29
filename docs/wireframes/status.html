@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beacon - Status</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --background: #FFFFFF;
+      --surface: #FAFAFA;
+      --text-primary: #09090B;
+      --text-muted: #71717A;
+      --border: #E4E4E7;
+      --accent: #3B82F6;
+      --status-op: #22C55E;
+      --status-op-bg: #DCFCE7;
+      --status-deg: #EAB308;
+      --status-deg-bg: #FEF9C3;
+      --status-out: #EF4444;
+      --status-out-bg: #FEE2E2;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      background: var(--background);
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      margin-bottom: 32px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    .nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav a:hover, .nav a.active {
+      color: var(--text-primary);
+    }
+
+    /* Status Banner */
+    .status-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px;
+      background: var(--status-op-bg);
+      border-radius: 8px;
+      margin-bottom: 32px;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--status-op);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .status-text {
+      font-weight: 600;
+      font-size: 14px;
+      color: #166534;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    /* Incident Card */
+    .incident-card {
+      background: var(--status-deg-bg);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .incident-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .incident-icon {
+      color: var(--status-deg);
+    }
+
+    .incident-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: #854D0E;
+    }
+
+    .incident-meta {
+      font-size: 13px;
+      color: #854D0E;
+      opacity: 0.8;
+    }
+
+    /* Services List */
+    .services-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .service-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .service-row:last-child {
+      border-bottom: none;
+    }
+
+    .service-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .service-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--status-op);
+    }
+
+    .service-dot.degraded { background: var(--status-deg); }
+    .service-dot.outage { background: var(--status-out); }
+
+    .service-name {
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .service-uptime {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Uptime Graph */
+    .uptime-container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .uptime-bars {
+      display: flex;
+      gap: 2px;
+      height: 32px;
+      margin-bottom: 8px;
+    }
+
+    .uptime-bar {
+      flex: 1;
+      background: var(--status-op);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .uptime-bar:hover {
+      opacity: 0.8;
+    }
+
+    .uptime-bar.degraded { background: var(--status-deg); }
+    .uptime-bar.outage { background: var(--status-out); }
+    .uptime-bar.no-data { background: #E4E4E7; }
+
+    .uptime-legend {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 32px 0;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Annotation */
+    .annotation {
+      background: #FFFBEB;
+      border: 1px dashed #F59E0B;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #92400E;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ANNOTATION: Header with logo and navigation -->
+    <div class="annotation">Header: Logo left, navigation right. Status link active.</div>
+
+    <header class="header">
+      <a href="/" class="logo">Beacon</a>
+      <nav class="nav">
+        <a href="/" class="active">Status</a>
+        <a href="/roadmap">Roadmap</a>
+        <a href="/changelog">Changelog</a>
+      </nav>
+    </header>
+
+    <!-- ANNOTATION: Overall status banner -->
+    <div class="annotation">Status Banner: Green = operational, Yellow = degraded, Red = outage. Pulse animation on dot.</div>
+
+    <div class="status-banner">
+      <span class="status-dot"></span>
+      <span class="status-text">All Systems Operational</span>
+    </div>
+
+    <!-- ANNOTATION: Current incidents section -->
+    <div class="annotation">Current Incidents: Only show if active incidents exist. Collapsible for details.</div>
+
+    <section class="section">
+      <h2 class="section-title">Current Incidents</h2>
+      <div class="incident-card">
+        <div class="incident-header">
+          <svg class="incident-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <span class="incident-title">API experiencing slow response times</span>
+        </div>
+        <div class="incident-meta">Started 2 hours ago - Investigating</div>
+      </div>
+    </section>
+
+    <!-- ANNOTATION: Services list -->
+    <div class="annotation">Services: Status dot + name + uptime %. Click row for service details.</div>
+
+    <section class="section">
+      <h2 class="section-title">Services</h2>
+      <div class="services-card">
+        <div class="service-row">
+          <div class="service-info">
+            <span class="service-dot"></span>
+            <span class="service-name">API</span>
+          </div>
+          <span class="service-uptime">99.9% uptime</span>
+        </div>
+        <div class="service-row">
+          <div class="service-info">
+            <span class="service-dot"></span>
+            <span class="service-name">Web Application</span>
+          </div>
+          <span class="service-uptime">100% uptime</span>
+        </div>
+        <div class="service-row">
+          <div class="service-info">
+            <span class="service-dot degraded"></span>
+            <span class="service-name">Database</span>
+          </div>
+          <span class="service-uptime">99.5% uptime</span>
+        </div>
+        <div class="service-row">
+          <div class="service-info">
+            <span class="service-dot"></span>
+            <span class="service-name">CDN</span>
+          </div>
+          <span class="service-uptime">100% uptime</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ANNOTATION: 90-day uptime graph -->
+    <div class="annotation">Uptime Graph: 90 bars for 90 days. Tooltip on hover shows date + status.</div>
+
+    <section class="section">
+      <h2 class="section-title">Uptime - Last 90 Days</h2>
+      <div class="uptime-container">
+        <div class="uptime-bars">
+          <!-- 90 bars representing each day -->
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar degraded"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar outage"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+          <div class="uptime-bar"></div><div class="uptime-bar"></div><div class="uptime-bar"></div>
+        </div>
+        <div class="uptime-legend">
+          <span>90 days ago</span>
+          <span>Today</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Powered by <a href="#">Beacon</a>
+    </footer>
+  </div>
+</body>
+</html>
