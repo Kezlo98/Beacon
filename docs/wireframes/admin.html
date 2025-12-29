@@ -5,26 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beacon - Admin Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Varela+Round&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --background: #FFFFFF;
-      --surface: #FAFAFA;
-      --text-primary: #09090B;
-      --text-secondary: #3F3F46;
+      /* Sage - Primary */
+      --sage-50: #F6F9F4;
+      --sage-100: #E8F0E4;
+      --sage-200: #C9DBC0;
+      --sage-300: #9BBF8A;
+      --sage-400: #6B9C56;
+      --sage-500: #4A7C3B;
+      /* Sand - Backgrounds */
+      --sand-50: #FDFCFA;
+      --sand-100: #FAF7F2;
+      --sand-200: #F3EDE3;
+      --sand-300: #E8DFD0;
+      /* Clay - Secondary */
+      --clay-400: #B8977D;
+      --clay-500: #9C7A5C;
+      /* Status - Organic */
+      --status-op: #6B9C56;
+      --status-op-bg: #E8F0E4;
+      --status-deg: #D4A574;
+      --status-deg-bg: #FEF3E3;
+      --status-out: #C97878;
+      --status-out-bg: #FCE8E8;
+      /* Text */
+      --text-primary: #3F3F46;
+      --text-secondary: #52525B;
       --text-muted: #71717A;
-      --border: #E4E4E7;
-      --accent: #3B82F6;
-      --status-op: #22C55E;
-      --status-deg: #EAB308;
-      --status-out: #EF4444;
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-      background: var(--surface);
+      font-family: 'Nunito Sans', -apple-system, sans-serif;
+      background: var(--sand-50);
       color: var(--text-primary);
       line-height: 1.5;
     }
@@ -38,16 +54,16 @@
     /* Sidebar */
     .sidebar {
       width: 240px;
-      background: var(--background);
-      border-right: 1px solid var(--border);
+      background: var(--sand-100);
+      border-right: 1px solid var(--sand-300);
       padding: 16px;
       display: flex;
       flex-direction: column;
     }
 
     .sidebar-logo {
+      font-family: 'Varela Round', sans-serif;
       font-size: 18px;
-      font-weight: 700;
       padding: 8px 12px;
       margin-bottom: 24px;
     }
@@ -61,22 +77,22 @@
       align-items: center;
       gap: 12px;
       padding: 10px 12px;
-      border-radius: 6px;
+      border-radius: 12px;
       color: var(--text-secondary);
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
       margin-bottom: 4px;
-      transition: all 0.15s;
+      transition: all 0.2s;
     }
 
     .nav-item:hover {
-      background: var(--surface);
+      background: var(--sand-200);
     }
 
     .nav-item.active {
-      background: var(--surface);
-      color: var(--text-primary);
+      background: var(--sage-100);
+      color: var(--sage-500);
     }
 
     .nav-item svg {
@@ -87,7 +103,7 @@
 
     .sidebar-footer {
       padding-top: 16px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--sand-300);
     }
 
     .user-menu {
@@ -101,7 +117,7 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--sage-400);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -140,8 +156,8 @@
     }
 
     .page-title {
+      font-family: 'Varela Round', sans-serif;
       font-size: 20px;
-      font-weight: 600;
     }
 
     .btn {
@@ -149,31 +165,31 @@
       align-items: center;
       gap: 6px;
       padding: 8px 16px;
-      border-radius: 6px;
+      border-radius: 9999px;
       font-size: 14px;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.2s;
       border: none;
     }
 
     .btn-primary {
-      background: var(--text-primary);
+      background: var(--sage-400);
       color: white;
     }
 
     .btn-primary:hover {
-      opacity: 0.9;
+      background: var(--sage-500);
     }
 
     .btn-secondary {
-      background: var(--background);
+      background: var(--sand-100);
       color: var(--text-primary);
-      border: 1px solid var(--border);
+      border: 1px solid var(--sand-300);
     }
 
     .btn-secondary:hover {
-      background: var(--surface);
+      background: var(--sand-200);
     }
 
     /* Stats Cards */
@@ -191,9 +207,9 @@
     }
 
     .stat-card {
-      background: var(--background);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      background: var(--sand-100);
+      border: 1px solid var(--sand-300);
+      border-radius: 16px;
       padding: 20px;
     }
 
@@ -204,6 +220,7 @@
     }
 
     .stat-value {
+      font-family: 'Varela Round', sans-serif;
       font-size: 28px;
       font-weight: 700;
     }
@@ -214,9 +231,9 @@
 
     /* Table */
     .table-card {
-      background: var(--background);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      background: var(--sand-100);
+      border: 1px solid var(--sand-300);
+      border-radius: 16px;
       overflow: hidden;
     }
 
@@ -225,12 +242,12 @@
       justify-content: space-between;
       align-items: center;
       padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--sand-300);
     }
 
     .table-title {
+      font-family: 'Varela Round', sans-serif;
       font-size: 14px;
-      font-weight: 600;
     }
 
     table {
@@ -246,14 +263,14 @@
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
+      background: var(--sand-200);
+      border-bottom: 1px solid var(--sand-300);
     }
 
     td {
       padding: 16px 20px;
       font-size: 14px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--sand-200);
     }
 
     tr:last-child td {
@@ -261,7 +278,7 @@
     }
 
     tr:hover {
-      background: var(--surface);
+      background: var(--sand-200);
     }
 
     /* Status Dot */
@@ -277,6 +294,15 @@
       border-radius: 50%;
     }
 
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+
+    .pulse-soft {
+      animation: pulse-soft 3s ease-in-out infinite;
+    }
+
     .status-dot.operational { background: var(--status-op); }
     .status-dot.degraded { background: var(--status-deg); }
     .status-dot.outage { background: var(--status-out); }
@@ -289,15 +315,16 @@
 
     .action-btn {
       padding: 6px;
-      border-radius: 4px;
+      border-radius: 8px;
       border: none;
       background: transparent;
       cursor: pointer;
       color: var(--text-muted);
+      transition: all 0.2s;
     }
 
     .action-btn:hover {
-      background: var(--surface);
+      background: var(--sand-200);
       color: var(--text-primary);
     }
 
@@ -307,34 +334,34 @@
 
     /* Annotation */
     .annotation {
-      background: #FFFBEB;
-      border: 1px dashed #F59E0B;
-      border-radius: 4px;
+      background: var(--sage-100);
+      border: 1px dashed var(--sage-300);
+      border-radius: 8px;
       padding: 8px 12px;
       font-size: 12px;
-      color: #92400E;
+      color: var(--sage-500);
       margin-bottom: 16px;
     }
 
     /* Badge */
     .badge {
       display: inline-block;
-      padding: 3px 8px;
-      border-radius: 4px;
+      padding: 3px 10px;
+      border-radius: 9999px;
       font-size: 11px;
       font-weight: 500;
     }
 
-    .badge-success { background: #DCFCE7; color: #166534; }
-    .badge-warning { background: #FEF9C3; color: #854D0E; }
-    .badge-info { background: #DBEAFE; color: #1E40AF; }
+    .badge-success { background: var(--status-op-bg); color: #3A5C2E; }
+    .badge-warning { background: var(--status-deg-bg); color: #8B5E34; }
+    .badge-info { background: #E3F0F8; color: #3B7AA5; }
   </style>
 </head>
 <body>
   <div class="layout">
     <!-- ANNOTATION: Sidebar navigation -->
     <div class="annotation" style="position: absolute; top: 8px; left: 8px; z-index: 100;">
-      Sidebar: Fixed width 240px. Logo, nav items with icons, user menu at bottom. Collapsible on mobile.
+      <strong>V1: Soft Sage</strong> — Organic Biophilic with Sage Green accent. Varela Round + Nunito Sans. Rounded-2xl cards.
     </div>
 
     <aside class="sidebar">
@@ -397,9 +424,6 @@
 
     <!-- Main Content -->
     <main class="main">
-      <!-- ANNOTATION: Dashboard overview -->
-      <div class="annotation">Dashboard: Overview with stat cards + recent activity table. Quick access to common actions.</div>
-
       <div class="page-header">
         <h1 class="page-title">Dashboard</h1>
         <div style="display: flex; gap: 8px;">
@@ -414,8 +438,6 @@
       </div>
 
       <!-- Stats -->
-      <div class="annotation">Stats Cards: Key metrics at a glance. Color-coded for quick scanning.</div>
-
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-label">Total Services</div>
@@ -436,8 +458,6 @@
       </div>
 
       <!-- Services Table -->
-      <div class="annotation">Services Table: CRUD operations. Status dot, uptime %, edit/delete actions.</div>
-
       <div class="table-card">
         <div class="table-header">
           <span class="table-title">Services</span>
@@ -463,7 +483,7 @@
               <td><strong>API</strong></td>
               <td>
                 <div class="status-cell">
-                  <span class="status-dot operational"></span>
+                  <span class="status-dot operational pulse-soft"></span>
                   Operational
                 </div>
               </td>
@@ -489,7 +509,7 @@
               <td><strong>Web Application</strong></td>
               <td>
                 <div class="status-cell">
-                  <span class="status-dot operational"></span>
+                  <span class="status-dot operational pulse-soft"></span>
                   Operational
                 </div>
               </td>
@@ -515,7 +535,7 @@
               <td><strong>Database</strong></td>
               <td>
                 <div class="status-cell">
-                  <span class="status-dot degraded"></span>
+                  <span class="status-dot degraded pulse-soft"></span>
                   Degraded
                 </div>
               </td>
@@ -541,7 +561,7 @@
               <td><strong>CDN</strong></td>
               <td>
                 <div class="status-cell">
-                  <span class="status-dot operational"></span>
+                  <span class="status-dot operational pulse-soft"></span>
                   Operational
                 </div>
               </td>

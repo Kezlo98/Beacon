@@ -5,25 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Beacon - Changelog</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Varela+Round&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --background: #FFFFFF;
-      --surface: #FAFAFA;
-      --text-primary: #09090B;
-      --text-secondary: #3F3F46;
+      /* Sage - Primary */
+      --sage-50: #F6F9F4;
+      --sage-100: #E8F0E4;
+      --sage-200: #C9DBC0;
+      --sage-300: #9BBF8A;
+      --sage-400: #6B9C56;
+      --sage-500: #4A7C3B;
+      /* Sand - Backgrounds */
+      --sand-50: #FDFCFA;
+      --sand-100: #FAF7F2;
+      --sand-200: #F3EDE3;
+      --sand-300: #E8DFD0;
+      /* Clay - Secondary */
+      --clay-400: #B8977D;
+      --clay-500: #9C7A5C;
+      /* Text */
+      --text-primary: #3F3F46;
+      --text-secondary: #52525B;
       --text-muted: #71717A;
-      --border: #E4E4E7;
-      --accent: #3B82F6;
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-      background: var(--background);
+      font-family: 'Nunito Sans', -apple-system, sans-serif;
+      background: var(--sand-50);
       color: var(--text-primary);
       line-height: 1.6;
+    }
+
+    /* Organic background blobs */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      right: -30%;
+      width: 80%;
+      height: 80%;
+      background: radial-gradient(circle, rgba(155, 191, 138, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -30%;
+      left: -20%;
+      width: 60%;
+      height: 60%;
+      background: radial-gradient(circle, rgba(232, 223, 208, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .container {
@@ -42,8 +79,8 @@
     }
 
     .logo {
+      font-family: 'Varela Round', sans-serif;
       font-size: 20px;
-      font-weight: 700;
       color: var(--text-primary);
       text-decoration: none;
     }
@@ -58,10 +95,15 @@
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
+      transition: color 0.2s;
     }
 
-    .nav a:hover, .nav a.active {
+    .nav a:hover {
       color: var(--text-primary);
+    }
+
+    .nav a.active {
+      color: var(--sage-500);
     }
 
     /* Page Header */
@@ -70,8 +112,8 @@
     }
 
     .page-title {
+      font-family: 'Varela Round', sans-serif;
       font-size: 24px;
-      font-weight: 700;
       margin-bottom: 8px;
     }
 
@@ -92,7 +134,8 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: var(--border);
+      background: var(--sand-300);
+      border-radius: 1px;
     }
 
     @media (min-width: 640px) {
@@ -114,6 +157,11 @@
       }
     }
 
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+
     .timeline-entry::before {
       content: '';
       position: absolute;
@@ -122,8 +170,9 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: var(--accent);
-      border: 2px solid var(--background);
+      background: var(--sage-400);
+      border: 2px solid var(--sand-50);
+      animation: pulse-soft 3s ease-in-out infinite;
     }
 
     @media (min-width: 640px) {
@@ -161,9 +210,9 @@
 
     /* Entry Content */
     .entry-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+      background: var(--sand-100);
+      border: 1px solid var(--sand-300);
+      border-radius: 16px;
       padding: 20px;
     }
 
@@ -177,21 +226,45 @@
     .version-badge {
       font-size: 12px;
       font-weight: 600;
-      padding: 4px 10px;
-      border-radius: 4px;
-      background: var(--accent);
-      color: white;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: var(--sage-100);
+      color: var(--sage-500);
     }
 
     .entry-title {
+      font-family: 'Varela Round', sans-serif;
       font-size: 16px;
-      font-weight: 600;
+    }
+
+    /* Release Type Tags */
+    .type-tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      margin-left: auto;
+    }
+
+    .type-tag.feature {
+      background: var(--sage-100);
+      color: var(--sage-500);
+    }
+
+    .type-tag.fix {
+      background: var(--sand-200);
+      color: var(--clay-500);
+    }
+
+    .type-tag.improvement {
+      background: #E3F0F8;
+      color: #3B7AA5;
     }
 
     /* Markdown Content */
     .entry-content h3 {
+      font-family: 'Varela Round', sans-serif;
       font-size: 14px;
-      font-weight: 600;
       color: var(--text-primary);
       margin-bottom: 8px;
       margin-top: 16px;
@@ -212,11 +285,12 @@
     }
 
     .entry-content code {
-      background: #F4F4F5;
+      background: var(--sand-200);
       padding: 2px 6px;
-      border-radius: 4px;
+      border-radius: 6px;
       font-size: 13px;
       font-family: 'SF Mono', monospace;
+      color: var(--clay-500);
     }
 
     /* Footer */
@@ -225,21 +299,28 @@
       padding: 48px 0 32px;
       font-size: 13px;
       color: var(--text-muted);
+      border-top: 1px solid var(--sand-200);
+      margin-top: 16px;
     }
 
     .footer a {
-      color: var(--accent);
+      color: var(--sage-500);
       text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer a:hover {
+      color: var(--sage-400);
     }
 
     /* Annotation */
     .annotation {
-      background: #FFFBEB;
-      border: 1px dashed #F59E0B;
-      border-radius: 4px;
+      background: var(--sage-100);
+      border: 1px dashed var(--sage-300);
+      border-radius: 8px;
       padding: 8px 12px;
       font-size: 12px;
-      color: #92400E;
+      color: var(--sage-500);
       margin-bottom: 16px;
     }
   </style>
@@ -247,7 +328,7 @@
 <body>
   <div class="container">
     <!-- ANNOTATION: Header -->
-    <div class="annotation">Header: Same as other pages. Changelog link active.</div>
+    <div class="annotation"><strong>V1: Soft Sage</strong> — Organic Biophilic with Sage Green accent. Varela Round + Nunito Sans. Rounded-2xl cards.</div>
 
     <header class="header">
       <a href="/" class="logo">Beacon</a>
@@ -258,17 +339,13 @@
       </nav>
     </header>
 
-    <!-- ANNOTATION: Page header -->
-    <div class="annotation">Page Header: Simple title and optional description.</div>
-
+    <!-- Page header -->
     <div class="page-header">
       <h1 class="page-title">Changelog</h1>
       <p class="page-description">All notable changes and updates to our platform.</p>
     </div>
 
-    <!-- ANNOTATION: Timeline -->
-    <div class="annotation">Timeline: Vertical layout with connecting line. Date on left (desktop), version badge + content on right. Markdown-rendered content.</div>
-
+    <!-- Timeline -->
     <div class="timeline">
       <!-- Entry 1 -->
       <div class="timeline-entry">
@@ -278,6 +355,7 @@
           <div class="entry-header">
             <span class="version-badge">v1.2.0</span>
             <span class="entry-title">Feature Release</span>
+            <span class="type-tag feature">Feature</span>
           </div>
           <div class="entry-content">
             <h3>New Features</h3>
@@ -309,6 +387,7 @@
           <div class="entry-header">
             <span class="version-badge">v1.1.0</span>
             <span class="entry-title">Roadmap & Voting</span>
+            <span class="type-tag feature">Feature</span>
           </div>
           <div class="entry-content">
             <h3>New Features</h3>
@@ -334,6 +413,7 @@
           <div class="entry-header">
             <span class="version-badge">v1.0.0</span>
             <span class="entry-title">Initial Release</span>
+            <span class="type-tag improvement">Launch</span>
           </div>
           <div class="entry-content">
             <h3>Features</h3>
